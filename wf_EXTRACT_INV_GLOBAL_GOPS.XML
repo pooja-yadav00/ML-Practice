@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Informatica proprietary -->
+<!DOCTYPE POWERMART SYSTEM "powrmart.dtd">
+<POWERMART CREATION_DATE="06/06/2024 16:24:13" REPOSITORY_VERSION="189.98">
+<REPOSITORY NAME="Rep_EU_R_IST_01" VERSION="189" CODEPAGE="UTF-8" DATABASETYPE="Oracle">
+<FOLDER NAME="TCT" GROUP="" OWNER="Administrator" SHARED="NOTSHARED" DESCRIPTION="" PERMISSIONS="rwx------" UUID="39745a6f-3f0a-478b-944a-06a8b233e588">
+    <CONFIG DESCRIPTION ="Default session configuration object" ISDEFAULT ="YES" NAME ="default_session_config" VERSIONNUMBER ="82">
+        <ATTRIBUTE NAME ="Advanced" VALUE =""/>
+        <ATTRIBUTE NAME ="Constraint based load ordering" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Cache LOOKUP() function" VALUE ="YES"/>
+        <ATTRIBUTE NAME ="Default buffer block size" VALUE ="Auto"/>
+        <ATTRIBUTE NAME ="Line Sequential buffer length" VALUE ="1024"/>
+        <ATTRIBUTE NAME ="Maximum Memory Allowed For Auto Memory Attributes" VALUE ="512MB"/>
+        <ATTRIBUTE NAME ="Maximum Percentage of Total Memory Allowed For Auto Memory Attributes" VALUE ="5"/>
+        <ATTRIBUTE NAME ="Additional Concurrent Pipelines for Lookup Cache Creation" VALUE ="Auto"/>
+        <ATTRIBUTE NAME ="Custom Properties" VALUE =""/>
+        <ATTRIBUTE NAME ="Pre-build lookup cache" VALUE ="Auto"/>
+        <ATTRIBUTE NAME ="Optimization Level" VALUE ="Medium"/>
+        <ATTRIBUTE NAME ="DateTime Format String" VALUE ="MM/DD/YYYY HH24:MI:SS.US"/>
+        <ATTRIBUTE NAME ="Pre 85 Timestamp Compatibility" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Log Options" VALUE ="0"/>
+        <ATTRIBUTE NAME ="Save session log by" VALUE ="Session runs"/>
+        <ATTRIBUTE NAME ="Save session log for these runs" VALUE ="0"/>
+        <ATTRIBUTE NAME ="Session Log File Max Size" VALUE ="0"/>
+        <ATTRIBUTE NAME ="Session Log File Max Time Period" VALUE ="0"/>
+        <ATTRIBUTE NAME ="Maximum Partial Session Log Files" VALUE ="1"/>
+        <ATTRIBUTE NAME ="Writer Commit Statistics Log Frequency" VALUE ="1"/>
+        <ATTRIBUTE NAME ="Writer Commit Statistics Log Interval" VALUE ="0"/>
+        <ATTRIBUTE NAME ="Error handling" VALUE =""/>
+        <ATTRIBUTE NAME ="Stop on errors" VALUE ="0"/>
+        <ATTRIBUTE NAME ="Override tracing" VALUE ="None"/>
+        <ATTRIBUTE NAME ="On Stored Procedure error" VALUE ="Stop"/>
+        <ATTRIBUTE NAME ="On Pre-session command task error" VALUE ="Stop"/>
+        <ATTRIBUTE NAME ="On Pre-Post SQL error" VALUE ="Stop"/>
+        <ATTRIBUTE NAME ="Enable Recovery" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Error Log Type" VALUE ="None"/>
+        <ATTRIBUTE NAME ="Error Log Table Name Prefix" VALUE =""/>
+        <ATTRIBUTE NAME ="Error Log File Name" VALUE ="PMError.log"/>
+        <ATTRIBUTE NAME ="Log Source Row Data" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Data Column Delimiter" VALUE ="|"/>
+        <ATTRIBUTE NAME ="Partitioning Options" VALUE =""/>
+        <ATTRIBUTE NAME ="Dynamic Partitioning" VALUE ="Disabled"/>
+        <ATTRIBUTE NAME ="Number of Partitions" VALUE ="1"/>
+        <ATTRIBUTE NAME ="Multiplication Factor" VALUE ="Auto"/>
+        <ATTRIBUTE NAME ="Session on Grid" VALUE =""/>
+        <ATTRIBUTE NAME ="Is Enabled" VALUE ="NO"/>
+    </CONFIG>
+    <SESSION DESCRIPTION ="" ISVALID ="YES" MAPPINGNAME ="m_TCT_ETL_JOB_CONTROL_Insert" NAME ="s_m_TCT_ETL_JOB_CONTROL_Insert" REUSABLE ="YES" SORTORDER ="Binary" VERSIONNUMBER ="63">
+        <SESSTRANSFORMATIONINST ISREPARTITIONPOINT ="NO" PIPELINE ="0" SINSTANCENAME ="DUAL" STAGE ="0" TRANSFORMATIONNAME ="DUAL" TRANSFORMATIONTYPE ="Source Definition"/>
+        <SESSTRANSFORMATIONINST ISREPARTITIONPOINT ="NO" PIPELINE ="1" SINSTANCENAME ="exp_Gather" STAGE ="1" TRANSFORMATIONNAME ="exp_Gather" TRANSFORMATIONTYPE ="Expression">
+            <PARTITION DESCRIPTION ="" NAME ="Partition #1"/>
+        </SESSTRANSFORMATIONINST>
+        <SESSTRANSFORMATIONINST ISREPARTITIONPOINT ="YES" PARTITIONTYPE ="PASS THROUGH" PIPELINE ="1" SINSTANCENAME ="SQ_DUAL" STAGE ="1" TRANSFORMATIONNAME ="SQ_DUAL" TRANSFORMATIONTYPE ="Source Qualifier"/>
+        <SESSTRANSFORMATIONINST ISREPARTITIONPOINT ="YES" PARTITIONTYPE ="PASS THROUGH" PIPELINE ="1" SINSTANCENAME ="OSEWF_ETL_WORKFLOW" STAGE ="2" TRANSFORMATIONNAME ="OSEWF_ETL_WORKFLOW" TRANSFORMATIONTYPE ="Target Definition"/>
+        <SESSTRANSFORMATIONINST ISREPARTITIONPOINT ="NO" PIPELINE ="0" SINSTANCENAME ="lkp_OSEDS_END_OF_DAY" STAGE ="0" TRANSFORMATIONNAME ="lkp_OSEDS_END_OF_DAY" TRANSFORMATIONTYPE ="Lookup Procedure"/>
+        <CONFIGREFERENCE REFOBJECTNAME ="default_session_config" TYPE ="Session config"/>
+        <SESSIONEXTENSION DSQINSTNAME ="SQ_DUAL" DSQINSTTYPE ="Source Qualifier" NAME ="Relational Reader" SINSTANCENAME ="DUAL" SUBTYPE ="Relational Reader" TRANSFORMATIONTYPE ="Source Definition" TYPE ="READER"/>
+        <SESSIONEXTENSION NAME ="Relational Reader" SINSTANCENAME ="SQ_DUAL" SUBTYPE ="Relational Reader" TRANSFORMATIONTYPE ="Source Qualifier" TYPE ="READER">
+            <CONNECTIONREFERENCE CNXREFNAME ="DB Connection" CONNECTIONNAME ="TCT_ODS_EDW" CONNECTIONNUMBER ="1" CONNECTIONSUBTYPE ="ODBC" CONNECTIONTYPE ="Relational" VARIABLE =""/>
+        </SESSIONEXTENSION>
+        <SESSIONEXTENSION NAME ="Relational Writer" SINSTANCENAME ="OSEWF_ETL_WORKFLOW" SUBTYPE ="Relational Writer" TRANSFORMATIONTYPE ="Target Definition" TYPE ="WRITER">
+            <CONNECTIONREFERENCE CNXREFNAME ="DB Connection" CONNECTIONNAME ="" CONNECTIONNUMBER ="1" CONNECTIONSUBTYPE ="" CONNECTIONTYPE ="Relational" VARIABLE ="$Target"/>
+            <ATTRIBUTE NAME ="Target load type" VALUE ="Normal"/>
+            <ATTRIBUTE NAME ="Insert" VALUE ="YES"/>
+            <ATTRIBUTE NAME ="Update as Update" VALUE ="YES"/>
+            <ATTRIBUTE NAME ="Update as Insert" VALUE ="NO"/>
+            <ATTRIBUTE NAME ="Update else Insert" VALUE ="NO"/>
+            <ATTRIBUTE NAME ="Enable array upsert or update" VALUE ="NO"/>
+            <ATTRIBUTE NAME ="Delete" VALUE ="YES"/>
+            <ATTRIBUTE NAME ="Truncate target table option" VALUE ="NO"/>
+            <ATTRIBUTE NAME ="Reject file directory" VALUE ="$PMBadFileDir&#x5c;"/>
+            <ATTRIBUTE NAME ="Reject filename" VALUE ="osewf_etl_workflow1.bad"/>
+        </SESSIONEXTENSION>
+        <SESSIONEXTENSION NAME ="Relational Lookup" SINSTANCENAME ="lkp_OSEDS_END_OF_DAY" SUBTYPE ="Relational Lookup" TRANSFORMATIONTYPE ="Lookup Procedure" TYPE ="LOOKUPEXTENSION">
+            <CONNECTIONREFERENCE CNXREFNAME ="DB Connection" CONNECTIONNAME ="" CONNECTIONNUMBER ="1" CONNECTIONSUBTYPE ="" CONNECTIONTYPE ="Relational" VARIABLE ="$Target"/>
+        </SESSIONEXTENSION>
+        <ATTRIBUTE NAME ="General Options" VALUE =""/>
+        <ATTRIBUTE NAME ="Write Backward Compatible Session Log File" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Session Log File Name" VALUE ="s_m_TCT_ETL_Job_Control_INSERT.log"/>
+        <ATTRIBUTE NAME ="Session Log File directory" VALUE ="$PMSessionLogDir&#x5c;"/>
+        <ATTRIBUTE NAME ="Parameter Filename" VALUE ="$PMRootDir/Param/wf_Feed.param"/>
+        <ATTRIBUTE NAME ="Enable Test Load" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="$Source connection value" VALUE =""/>
+        <ATTRIBUTE NAME ="$Target connection value" VALUE ="Relational:TCT_ODS_EDW"/>
+        <ATTRIBUTE NAME ="Treat source rows as" VALUE ="Insert"/>
+        <ATTRIBUTE NAME ="Commit Type" VALUE ="Target"/>
+        <ATTRIBUTE NAME ="Commit Interval" VALUE ="10000"/>
+        <ATTRIBUTE NAME ="Commit On End Of File" VALUE ="YES"/>
+        <ATTRIBUTE NAME ="Rollback Transactions on Errors" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Recovery Strategy" VALUE ="Fail task and continue workflow"/>
+        <ATTRIBUTE NAME ="Java Classpath" VALUE =""/>
+        <ATTRIBUTE NAME ="Performance" VALUE =""/>
+        <ATTRIBUTE NAME ="DTM buffer size" VALUE ="Auto"/>
+        <ATTRIBUTE NAME ="Collect performance data" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Write performance data to repository" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Incremental Aggregation" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Enable high precision" VALUE ="YES"/>
+        <ATTRIBUTE NAME ="Session retry on deadlock" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Pushdown Optimization" VALUE ="None"/>
+        <ATTRIBUTE NAME ="Allow Temporary View for Pushdown" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Allow Temporary Sequence for Pushdown" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Allow Pushdown for User Incompatible Connections" VALUE ="NO"/>
+        <METADATAEXTENSION DATATYPE ="STRING" DESCRIPTION ="" DOMAINNAME ="User Defined Metadata Domain" ISCLIENTEDITABLE ="YES" ISCLIENTVISIBLE ="YES" ISREUSABLE ="NO" ISSHAREREAD ="NO" ISSHAREWRITE ="NO" MAXLENGTH ="256" NAME ="Extension" VALUE ="" VENDORNAME ="INFORMATICA"/>
+    </SESSION>
+    <SESSION DESCRIPTION ="" ISVALID ="YES" MAPPINGNAME ="m_TCT_ETL_JOB_CONTROL_Update" NAME ="s_m_TCT_ETL_JOB_CONTROL_Update" REUSABLE ="YES" SORTORDER ="Binary" VERSIONNUMBER ="63">
+        <SESSTRANSFORMATIONINST ISREPARTITIONPOINT ="NO" PIPELINE ="1" SINSTANCENAME ="exp_Gather1" STAGE ="2" TRANSFORMATIONNAME ="exp_Gather1" TRANSFORMATIONTYPE ="Expression">
+            <PARTITION DESCRIPTION ="" NAME ="Partition #1"/>
+        </SESSTRANSFORMATIONINST>
+        <SESSTRANSFORMATIONINST ISREPARTITIONPOINT ="YES" PARTITIONTYPE ="PASS THROUGH" PIPELINE ="1" SINSTANCENAME ="OSEWF_ETL_WORKFLOW1" STAGE ="1" TRANSFORMATIONNAME ="OSEWF_ETL_WORKFLOW1" TRANSFORMATIONTYPE ="Target Definition">
+            <ATTRIBUTE NAME ="Post SQL" VALUE ="update osewf_etl_workflow&#xD;&#xA;set workflow_status=&apos;SKIPPED&apos;&#xD;&#xA;where&#xD;&#xA;osewf_etl_workflow.workflow_name=&apos;$PMWorkflowName&apos; and&#xD;&#xA;osewf_etl_workflow.workflow_status in (&apos;STARTED&apos;,&apos;POLLING&apos;)"/>
+        </SESSTRANSFORMATIONINST>
+        <SESSTRANSFORMATIONINST ISREPARTITIONPOINT ="NO" PIPELINE ="0" SINSTANCENAME ="OSEWF_ETL_WORKFLOW" STAGE ="0" TRANSFORMATIONNAME ="OSEWF_ETL_WORKFLOW" TRANSFORMATIONTYPE ="Source Definition"/>
+        <SESSTRANSFORMATIONINST ISREPARTITIONPOINT ="YES" PARTITIONTYPE ="PASS THROUGH" PIPELINE ="1" SINSTANCENAME ="SQ_OSEWF_ETL_WORKFLOW" STAGE ="2" TRANSFORMATIONNAME ="SQ_OSEWF_ETL_WORKFLOW" TRANSFORMATIONTYPE ="Source Qualifier"/>
+        <CONFIGREFERENCE REFOBJECTNAME ="default_session_config" TYPE ="Session config"/>
+        <SESSIONCOMPONENT REFOBJECTNAME ="presession_variable_assignment" REUSABLE ="NO" TYPE ="Pre-session variable assignment">
+            <TASK DESCRIPTION ="" NAME ="presession_variable_assignment" REUSABLE ="NO" TYPE ="Command" VERSIONNUMBER ="63">
+                <ATTRIBUTE NAME ="Fail task if any command fails" VALUE ="NO"/>
+                <ATTRIBUTE NAME ="Recovery Strategy" VALUE ="Fail task and continue workflow"/>
+            </TASK>
+            <VALUEPAIR EXECORDER ="1" NAME ="$$SRC_ROWS_FILTERED" REVERSEASSIGNMENT ="NO" VALUE ="$$WF_ROWS_FILTERED"/>
+            <VALUEPAIR EXECORDER ="2" NAME ="$$SRC_ROWS_READ" REVERSEASSIGNMENT ="NO" VALUE ="$$WF_SRC_ROWS_READ"/>
+            <VALUEPAIR EXECORDER ="3" NAME ="$$TGT_ROWS_WRITTEN" REVERSEASSIGNMENT ="NO" VALUE ="$$WF_TGT_ROWS_WRITTEN"/>
+            <VALUEPAIR EXECORDER ="4" NAME ="$$SRC_VALUE_FILTERED" REVERSEASSIGNMENT ="NO" VALUE ="$$WF_VALUE_FILTERED"/>
+            <VALUEPAIR EXECORDER ="5" NAME ="$$SRC_VALUE_READ" REVERSEASSIGNMENT ="NO" VALUE ="$$WF_SRC_VALUE_READ"/>
+            <VALUEPAIR EXECORDER ="6" NAME ="$$TGT_VALUE_WRITTEN" REVERSEASSIGNMENT ="NO" VALUE ="$$WF_TGT_VALUE_WRITTEN"/>
+        </SESSIONCOMPONENT>
+        <SESSIONCOMPONENT REFOBJECTNAME ="postsession_success_variable_assignment" REUSABLE ="NO" TYPE ="Post-session success variable assignment">
+            <TASK DESCRIPTION ="" NAME ="postsession_success_variable_assignment" REUSABLE ="NO" TYPE ="Command" VERSIONNUMBER ="63">
+                <ATTRIBUTE NAME ="Fail task if any command fails" VALUE ="NO"/>
+                <ATTRIBUTE NAME ="Recovery Strategy" VALUE ="Fail task and continue workflow"/>
+            </TASK>
+        </SESSIONCOMPONENT>
+        <SESSIONCOMPONENT REFOBJECTNAME ="postsession_failure_variable_assignment" REUSABLE ="NO" TYPE ="Post-session failure variable assignment">
+            <TASK DESCRIPTION ="" NAME ="postsession_failure_variable_assignment" REUSABLE ="NO" TYPE ="Command" VERSIONNUMBER ="63">
+                <ATTRIBUTE NAME ="Fail task if any command fails" VALUE ="NO"/>
+                <ATTRIBUTE NAME ="Recovery Strategy" VALUE ="Fail task and continue workflow"/>
+            </TASK>
+        </SESSIONCOMPONENT>
+        <SESSIONEXTENSION NAME ="Relational Writer" SINSTANCENAME ="OSEWF_ETL_WORKFLOW1" SUBTYPE ="Relational Writer" TRANSFORMATIONTYPE ="Target Definition" TYPE ="WRITER">
+            <CONNECTIONREFERENCE CNXREFNAME ="DB Connection" CONNECTIONNAME ="" CONNECTIONNUMBER ="1" CONNECTIONSUBTYPE ="" CONNECTIONTYPE ="Relational" VARIABLE ="$Target"/>
+            <ATTRIBUTE NAME ="Target load type" VALUE ="Normal"/>
+            <ATTRIBUTE NAME ="Insert" VALUE ="YES"/>
+            <ATTRIBUTE NAME ="Update as Update" VALUE ="YES"/>
+            <ATTRIBUTE NAME ="Update as Insert" VALUE ="NO"/>
+            <ATTRIBUTE NAME ="Update else Insert" VALUE ="NO"/>
+            <ATTRIBUTE NAME ="Enable array upsert or update" VALUE ="NO"/>
+            <ATTRIBUTE NAME ="Delete" VALUE ="YES"/>
+            <ATTRIBUTE NAME ="Truncate target table option" VALUE ="NO"/>
+            <ATTRIBUTE NAME ="Reject file directory" VALUE ="$PMBadFileDir&#x5c;"/>
+            <ATTRIBUTE NAME ="Reject filename" VALUE ="osewf_etl_workflow11.bad"/>
+        </SESSIONEXTENSION>
+        <SESSIONEXTENSION DSQINSTNAME ="SQ_OSEWF_ETL_WORKFLOW" DSQINSTTYPE ="Source Qualifier" NAME ="Relational Reader" SINSTANCENAME ="OSEWF_ETL_WORKFLOW" SUBTYPE ="Relational Reader" TRANSFORMATIONTYPE ="Source Definition" TYPE ="READER"/>
+        <SESSIONEXTENSION NAME ="Relational Reader" SINSTANCENAME ="SQ_OSEWF_ETL_WORKFLOW" SUBTYPE ="Relational Reader" TRANSFORMATIONTYPE ="Source Qualifier" TYPE ="READER">
+            <CONNECTIONREFERENCE CNXREFNAME ="DB Connection" CONNECTIONNAME ="TCT_ODS_EDW" CONNECTIONNUMBER ="1" CONNECTIONSUBTYPE ="ODBC" CONNECTIONTYPE ="Relational" VARIABLE =""/>
+        </SESSIONEXTENSION>
+        <ATTRIBUTE NAME ="General Options" VALUE =""/>
+        <ATTRIBUTE NAME ="Write Backward Compatible Session Log File" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Session Log File Name" VALUE ="s_m_TCT_ETL_JOB_CONTROL_Update2.log"/>
+        <ATTRIBUTE NAME ="Session Log File directory" VALUE ="$PMSessionLogDir&#x5c;"/>
+        <ATTRIBUTE NAME ="Parameter Filename" VALUE =""/>
+        <ATTRIBUTE NAME ="Enable Test Load" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="$Source connection value" VALUE =""/>
+        <ATTRIBUTE NAME ="$Target connection value" VALUE ="Relational:TCT_ODS_EDW"/>
+        <ATTRIBUTE NAME ="Treat source rows as" VALUE ="Update"/>
+        <ATTRIBUTE NAME ="Commit Type" VALUE ="Target"/>
+        <ATTRIBUTE NAME ="Commit Interval" VALUE ="10000"/>
+        <ATTRIBUTE NAME ="Commit On End Of File" VALUE ="YES"/>
+        <ATTRIBUTE NAME ="Rollback Transactions on Errors" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Recovery Strategy" VALUE ="Fail task and continue workflow"/>
+        <ATTRIBUTE NAME ="Java Classpath" VALUE =""/>
+        <ATTRIBUTE NAME ="Performance" VALUE =""/>
+        <ATTRIBUTE NAME ="DTM buffer size" VALUE ="Auto"/>
+        <ATTRIBUTE NAME ="Collect performance data" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Write performance data to repository" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Incremental Aggregation" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Enable high precision" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Session retry on deadlock" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Pushdown Optimization" VALUE ="None"/>
+        <ATTRIBUTE NAME ="Allow Temporary View for Pushdown" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Allow Temporary Sequence for Pushdown" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Allow Pushdown for User Incompatible Connections" VALUE ="NO"/>
+        <METADATAEXTENSION DATATYPE ="STRING" DESCRIPTION ="" DOMAINNAME ="User Defined Metadata Domain" ISCLIENTEDITABLE ="YES" ISCLIENTVISIBLE ="YES" ISREUSABLE ="NO" ISSHAREREAD ="NO" ISSHAREWRITE ="NO" MAXLENGTH ="256" NAME ="Extension" VALUE ="" VENDORNAME ="INFORMATICA"/>
+    </SESSION>
+    <WORKFLOW DESCRIPTION ="Workflow to extract Physical Positions from ODS and create output file for DWH" ISENABLED ="YES" ISRUNNABLESERVICE ="NO" ISSERVICE ="NO" ISVALID ="YES" NAME ="wf_EXTRACT_INV_GLOBAL_GOPS" REUSABLE_SCHEDULER ="NO" SCHEDULERNAME ="Scheduler" SERVERNAME ="Int_EU_R_TCT_01" SERVER_DOMAINNAME ="ISE_AWS_PROD_PC_01" SUSPEND_ON_ERROR ="NO" TASKS_MUST_RUN_ON_SERVER ="NO" VERSIONNUMBER ="2">
+        <SCHEDULER DESCRIPTION ="" NAME ="Scheduler" REUSABLE ="NO" VERSIONNUMBER ="2">
+            <SCHEDULEINFO SCHEDULETYPE ="ONDEMAND"/>
+        </SCHEDULER>
+        <TASK DESCRIPTION ="" NAME ="Start" REUSABLE ="NO" TYPE ="Start" VERSIONNUMBER ="2"/>
+        <TASK DESCRIPTION ="" NAME ="CaptureStatistics" REUSABLE ="NO" TYPE ="Assignment" VERSIONNUMBER ="2">
+            <ATTRIBUTE NAME ="Assignment Condition" VALUE =""/>
+            <VALUEPAIR EXECORDER ="1" NAME ="$$WF_SRC_ROWS_READ" REVERSEASSIGNMENT ="NO" VALUE ="$s_m_EXTRACT_INV_Inventory.SrcSuccessRows"/>
+            <VALUEPAIR EXECORDER ="2" NAME ="$$WF_TGT_ROWS_WRITTEN" REVERSEASSIGNMENT ="NO" VALUE ="$s_m_EXTRACT_INV_Inventory.TgtSuccessRows"/>
+        </TASK>
+        <SESSION DESCRIPTION ="" ISVALID ="YES" MAPPINGNAME ="m_EXTRACT_INV_Inventory" NAME ="s_m_EXTRACT_INV_Inventory" REUSABLE ="NO" SORTORDER ="Binary" VERSIONNUMBER ="2">
+            <SESSTRANSFORMATIONINST ISREPARTITIONPOINT ="NO" PIPELINE ="0" SINSTANCENAME ="ODS_PP_POSITIONS" STAGE ="0" TRANSFORMATIONNAME ="ODS_PP_POSITIONS" TRANSFORMATIONTYPE ="Source Definition"/>
+            <SESSTRANSFORMATIONINST ISREPARTITIONPOINT ="NO" PIPELINE ="1" SINSTANCENAME ="STG_INV_Inventory" STAGE ="1" TRANSFORMATIONNAME ="STG_INV_Inventory" TRANSFORMATIONTYPE ="Expression">
+                <PARTITION DESCRIPTION ="" NAME ="Partition #1"/>
+            </SESSTRANSFORMATIONINST>
+            <SESSTRANSFORMATIONINST ISREPARTITIONPOINT ="YES" PARTITIONTYPE ="PASS THROUGH" PIPELINE ="1" SINSTANCENAME ="SQ_ODS_INV_Inventory" STAGE ="1" TRANSFORMATIONNAME ="SQ_ODS_INV_Inventory" TRANSFORMATIONTYPE ="Source Qualifier">
+                <ATTRIBUTE NAME ="Sql Query" VALUE ="--&#xD;&#xA;-- OSINV_Infa_Extract.sql&#xD;&#xA;--&#xD;&#xA;-- Ver Date       Author            Comment&#xD;&#xA;-- 1.0 12/08/2011 JP             Initial commit to Clearcase&#xD;&#xA;-- 1.1 12/09/2011 JP            Amend Trans Vers, Air Vac Indicator --  rev01&#xD;&#xA;--1.2   15/09/2011  JP          Add Front Back Indicator&#xD;&#xA;--1.3   22/11/2011  JP          Filter on POSTING_TYPE, S Only&#xD;&#xA;SELECT&#xD;&#xA;ODS_PP_POSITIONS.OSEDS_END_OF_DAY_ID, ODS_PP_POSITIONS.OSEDS_SYSTEM_ID,&#xD;&#xA;ODS_PP_POSITIONS.OSEDS_RUN_NUMBER, ODS_PP_POSITIONS.OSEDS_END_OF_DAY_TYPE,&#xD;&#xA;ODS_PP_POSITIONS.OSEDS_END_OF_DAY_STATUS_NAME, ODS_PP_POSITIONS.OSEDS_START_DATE_TIME,&#xD;&#xA;ODS_PP_POSITIONS.OSEDS_END_DATE_TIME, ODS_PP_POSITIONS.OSEDS_RELEASE_DATE_TIME,&#xD;&#xA;ODS_PP_POSITIONS.OSEDS_WD1_REGION_NAME, ODS_PP_POSITIONS.OSPSP_PK, ODS_PP_POSITIONS.VALUATION_OSVAL_FK,&#xD;&#xA;ODS_PP_POSITIONS.AS_AT_DATETIME, ODS_PP_POSITIONS.VALUATION_ID_FRONT_BACK VALUATION_ID, ODS_PP_POSITIONS.VALUATION_VERSION_NUMBER,&#xD;&#xA;ODS_PP_POSITIONS.TRANSACTION_OSTRA_FK, ODS_PP_POSITIONS.TRANSACTION_ID,&#xD;&#xA;ODS_PP_POSITIONS.TRANSACTION_REFERENCE, ODS_PP_POSITIONS.TRANSACTION_VERSION,&#xD;&#xA;ODS_PP_POSITIONS.DEAL_VERSION_NUMBER, ODS_PP_POSITIONS.SHIPMENT_VERSION_NUMBER,&#xD;&#xA;ODS_PP_POSITIONS.PARCEL_VERSION_NUMBER, ODS_PP_POSITIONS.TRANSACTION_TYPE,&#xD;&#xA;ODS_PP_POSITIONS.BUSINESS_DAY_OSBSD_FK, ODS_PP_POSITIONS.BUSINESS_DAY,&#xD;&#xA;ODS_PP_POSITIONS.PREVIOUS_BUSINESS_DAY, ODS_PP_POSITIONS.IST_BUSINESS_UNIT_RDIBU_FK,&#xD;&#xA;ODS_PP_POSITIONS.IST_BUSINESS_UNIT_NAME, ODS_PP_POSITIONS.LEGAL_ENTITY_NAME,&#xD;&#xA;ODS_PP_POSITIONS.RDLGE_GI, ODS_PP_POSITIONS.RDIBU_GI, ODS_PP_POSITIONS.REGION_RDREG_FK,&#xD;&#xA;ODS_PP_POSITIONS.REGION_NAME, ODS_PP_POSITIONS.RDREG_GI, ODS_PP_POSITIONS.CHAIN_OSCHA_FK,&#xD;&#xA;ODS_PP_POSITIONS.CHAIN, ODS_PP_POSITIONS.CHAIN_PREFIX, ODS_PP_POSITIONS.CHAIN_NUMBER,&#xD;&#xA;ODS_PP_POSITIONS.BOOK, ODS_PP_POSITIONS.BENCH, ODS_PP_POSITIONS.INVENTORY_GRADE_RDGRD_FK,&#xD;&#xA;ODS_PP_POSITIONS.INVENTORY_GRADE_NAME, ODS_PP_POSITIONS.INVENTORY_RDGRD_GI, ODS_PP_POSITIONS.MARKET_RDLOC_FK,&#xD;&#xA;ODS_PP_POSITIONS.MARKET_NAME, ODS_PP_POSITIONS.PARENT_MARKET_NAME, ODS_PP_POSITIONS.MARKET_RDLOC_GI,&#xD;&#xA;ODS_PP_POSITIONS.INTANK_FACILITY_RDFAC_FK, ODS_PP_POSITIONS.INTANK_FACILITY_NAME,&#xD;&#xA;ODS_PP_POSITIONS.INTANK_FACILITY_DESCRIPTION, ODS_PP_POSITIONS.INTANK_RDFAC_GI,&#xD;&#xA;ODS_PP_POSITIONS.POSITION_DATE, ODS_PP_POSITIONS.COL_GAS_CYCLE_RDEPE_FK, ODS_PP_POSITIONS.COL_GAS_CAL_NAME,&#xD;&#xA;ODS_PP_POSITIONS.COL_GAS_PERIOD_NAME, ODS_PP_POSITIONS.COL_GAS_PERIOD_CODE, ODS_PP_POSITIONS.RDEPE_PK,&#xD;&#xA;ODS_PP_POSITIONS.INVENTORY_TYPE_IND, ODS_PP_POSITIONS.POSTING_TYPE_IND, ODS_PP_POSITIONS.AIR_VAC_INDICATOR,&#xD;&#xA;ODS_PP_POSITIONS.QUANTITY_BBL, ODS_PP_POSITIONS.QUANTITY_MT, ODS_PP_POSITIONS.QUANTITY_M3&#xD;&#xA;FROM&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;(select&#xD;&#xA;   oseds.end_of_day_id OSEDS_END_OF_DAY_ID,&#xD;&#xA;   oseds.system_id OSEDS_SYSTEM_ID,&#xD;&#xA;   oseds.run_number OSEDS_RUN_NUMBER,&#xD;&#xA;   eodtype.name OSEDS_END_OF_DAY_TYPE,&#xD;&#xA;   eodstat.name OSEDS_END_OF_DAY_STATUS_NAME,&#xD;&#xA;   oseds.start_date_time OSEDS_START_DATE_TIME,&#xD;&#xA;   oseds.end_date_time OSEDS_END_DATE_TIME,&#xD;&#xA;   oseds.release_date_time OSEDS_RELEASE_DATE_TIME,&#xD;&#xA;   coalesce(oseds_reg.name,&apos;NA&apos;) OSEDS_WD1_REGION_NAME,&#xD;&#xA;   ospsp.ospsp_pk,&#xD;&#xA;    -- Valuations data&#xD;&#xA;   ospsp.valuation_osval_fk,&#xD;&#xA;   ospsp.AS_AT_DATETIME,           &#xD;&#xA;   osval.VALUATION_ID,      &#xD;&#xA;   osval.VALUATION_VERSION_NUMBER,&#xD;&#xA;   ospsp.transaction_ostra_fk ,&#xD;&#xA;            concat(ostra.transaction_reference , &apos;-&apos; , CASE WHEN tratyp.name=&apos;DEAL PARCEL&apos; THEN  coalesce(ostra.SHIPMENT_VERSION_NUMBER,0)+coalesce(ostra.PARCEL_VERSION_NUMBER,0)+coalesce(ostra.DEAL_VERSION_NUMBER,0) WHEN tratyp.name=&apos;BALANCING PARCEL&apos; THEN  coalesce(ostra.SHIPMENT_VERSION_NUMBER,0)+coalesce(ostra.PARCEL_VERSION_NUMBER,0)+coalesce(ostra.DEAL_VERSION_NUMBER,0) WHEN tratyp.name=&apos;STOCK PARCEL&apos; THEN  ostra.SHIPMENT_VERSION_NUMBER WHEN tratyp.name=&apos;OTC SWAP&apos; THEN  ostra.DEAL_VERSION_NUMBER WHEN tratyp.name=&apos;OTC OPTION&apos; THEN  ostra.DEAL_VERSION_NUMBER WHEN tratyp.name=&apos;FUTURE&apos; THEN  ostra.DEAL_VERSION_NUMBER WHEN tratyp.name=&apos;CLEARED SWAP&apos; THEN  ostra.DEAL_VERSION_NUMBER WHEN tratyp.name=&apos;CLEARED OPTION&apos; THEN  ostra.DEAL_VERSION_NUMBER WHEN tratyp.name=&apos;EXCHANGE OPTION&apos; THEN  ostra.DEAL_VERSION_NUMBER WHEN tratyp.name=&apos;PARTIAL&apos; THEN  ostra.DEAL_VERSION_NUMBER WHEN tratyp.name=&apos;INVENTORY POSITION&apos; THEN  1 WHEN tratyp.name=&apos;IN TRANSIT&apos; THEN  1 WHEN tratyp.name=&apos;FUTURES POSITION&apos; THEN  1 WHEN tratyp.name=&apos;COST&apos; THEN  ostra.OSTRA_PK WHEN tratyp.name=concat(&apos;P&apos;,chr(38), &apos;L ADJUSTMENT&apos; )THEN  ostra.OSTRA_PK                 END)  TRANSACTION_ID,&#xD;&#xA;   osval.TRANSACTION_REFERENCE,   &#xD;&#xA;          CASE WHEN tratyp.name=&apos;DEAL PARCEL&apos; THEN  coalesce(ostra.SHIPMENT_VERSION_NUMBER,0)+coalesce(ostra.PARCEL_VERSION_NUMBER,0)+coalesce(ostra.DEAL_VERSION_NUMBER,0) WHEN tratyp.name=&apos;BALANCING PARCEL&apos; THEN  coalesce(ostra.SHIPMENT_VERSION_NUMBER,0)+coalesce(ostra.PARCEL_VERSION_NUMBER,0)+coalesce(ostra.DEAL_VERSION_NUMBER,0) WHEN tratyp.name=&apos;STOCK PARCEL&apos; THEN  ostra.SHIPMENT_VERSION_NUMBER WHEN tratyp.name=&apos;OTC SWAP&apos; THEN  ostra.DEAL_VERSION_NUMBER WHEN tratyp.name=&apos;OTC OPTION&apos; THEN  ostra.DEAL_VERSION_NUMBER WHEN tratyp.name=&apos;FUTURE&apos; THEN  ostra.DEAL_VERSION_NUMBER WHEN tratyp.name=&apos;CLEARED SWAP&apos; THEN  ostra.DEAL_VERSION_NUMBER WHEN tratyp.name=&apos;CLEARED OPTION&apos; THEN  ostra.DEAL_VERSION_NUMBER WHEN tratyp.name=&apos;EXCHANGE OPTION&apos; THEN  ostra.DEAL_VERSION_NUMBER WHEN tratyp.name=&apos;PARTIAL&apos; THEN  ostra.DEAL_VERSION_NUMBER WHEN tratyp.name=&apos;INVENTORY POSITION&apos; THEN  1 WHEN tratyp.name=&apos;IN TRANSIT&apos; THEN  1 WHEN tratyp.name=&apos;FUTURES POSITION&apos; THEN  1 WHEN tratyp.name=&apos;COST&apos; THEN  ostra.OSTRA_PK WHEN tratyp.name=concat(&apos;P&apos;,chr(38),&apos;L ADJUSTMENT&apos;) THEN  ostra.OSTRA_PK                END  TRANSACTION_VERSION,&#xD;&#xA;&#xD;&#xA;      ostra.deal_version_number,&#xD;&#xA;   ostra.shipment_version_number,&#xD;&#xA;   ostra.parcel_version_number,&#xD;&#xA;      CASE WHEN tratyp.NAME=&apos;NA&apos; THEN &apos;&apos;  ELSE tratyp.NAME END   TRANSACTION_TYPE, &#xD;&#xA;  &#xD;&#xA;   --business day  &#xD;&#xA;   ospsp.BUSINESS_DAY_OSBSD_FK,        &#xD;&#xA;   osbsd.BUSINESS_DAY,         &#xD;&#xA;   osbsd.PREVIOUS_BUSINESS_DAY,&#xD;&#xA;  &#xD;&#xA;   --bus unit&#xD;&#xA;  &#xD;&#xA;   ospsp.ist_business_unit_rdibu_fk,&#xD;&#xA;   rdibu.business_unit_name IST_BUSINESS_UNIT_NAME,&#xD;&#xA;   rdlge.company_name LEGAL_ENTITY_NAME,&#xD;&#xA;  rdibu.rdibu_gi RDIBU_GI,&#xD;&#xA;  rdlge.rdlge_gi RDLGE_GI,&#xD;&#xA;   --region&#xD;&#xA;   --*** REG FK REG NAME REG GI&#xD;&#xA;   ospsp.region_rdreg_fk,&#xD;&#xA;   rdreg.name region_name,&#xD;&#xA;   rdreg.rdreg_gi rdreg_gi,&#xD;&#xA;   --Chain&#xD;&#xA;   ospsp.chain_oscha_fk,&#xD;&#xA;   oscha.chain_prefix,&#xD;&#xA;   concat(oscha.chain_prefix, substr(to_char(oscha.chain_number, &apos;0000&apos;),2)) as CHAIN,&#xD;&#xA;   oscha.chain_number,&#xD;&#xA;   oscha.book BOOK,&#xD;&#xA;   oscha.bench BENCH,&#xD;&#xA;   --Inventory&#xD;&#xA;   ospsp.inventory_grade_rdgrd_fk,&#xD;&#xA;   CASE WHEN rdgrd.grade_name=&apos;NA&apos; THEN &apos;&apos;  ELSE rdgrd.grade_name END   INVENTORY_GRADE_NAME,&#xD;&#xA;   rdgrd.rdgrd_gi INVENTORY_RDGRD_GI,&#xD;&#xA;&#xD;&#xA;   --Market&#xD;&#xA;   ospsp.market_rdloc_fk,&#xD;&#xA;   CASE WHEN rdloc.market_name=&apos;NA&apos; THEN &apos;&apos;  ELSE rdloc.market_name END   MARKET_NAME,&#xD;&#xA;   CASE WHEN rdloc.parent_market_name=&apos;NA&apos; THEN &apos;&apos;  ELSE rdloc.parent_market_name END   parent_MARKET_NAME,&#xD;&#xA;      rdloc.rdloc_gi MARKET_RDLOC_GI,&#xD;&#xA;  &#xD;&#xA;   -- in tank&#xD;&#xA;   ospsp.intank_facility_rdfac_fk,&#xD;&#xA;   rdfac.name INTANK_FACILITY_NAME,&#xD;&#xA;   rdfac.description INTANK_FACILITY_DESCRIPTION,&#xD;&#xA;   rdfac.rdfac_gi INTANK_RDFAC_GI,&#xD;&#xA;       &#xD;&#xA;    --postion date&#xD;&#xA;   &#xD;&#xA;    rdfdt.base_date AS POSITION_DATE,&#xD;&#xA;    --col gas&#xD;&#xA;   ospsp.col_gas_cycle_rdepe_fk,&#xD;&#xA;   rdepe.expiry_cal_name  COL_GAS_CAL_NAME,&#xD;&#xA;   rdepe.period_name  COL_GAS_PERIOD_NAME,&#xD;&#xA;   rdepe.period_code  COL_GAS_PERIOD_CODE,&#xD;&#xA;   rdepe_pk,                                                            --rev1&#xD;&#xA;   ospsp.inventory_type_ind,&#xD;&#xA;   ospsp.posting_type_ind,&#xD;&#xA;   null air_vac_indicator,          -- osval.air_vac_indicator, --rev1&#xD;&#xA;   ospsp.quantity_bbl,&#xD;&#xA;   ospsp.quantity_mt,&#xD;&#xA;   ospsp.quantity_m3,&#xD;&#xA;          (case &#xD;&#xA;        when ostra.COUNTERPARTY_RDPTY_FK = osval.IST_BUSINESS_UNIT_RDIBU_FK  then concat(valuation_id ,&apos;-&apos; , osval.FRONT_BACK_INDICATOR)&#xD;&#xA;        else osval.valuation_id  end) valuation_id_front_back&#xD;&#xA;&#xD;&#xA;  &#xD;&#xA;  &#xD;&#xA;   FROM rdownerbs1.rdcod_code tratyp, rdownerbs1.rdreg_region rdreg, osownerbs1.rdlge_legal_entity_vw rdlge, rdownerbs1.rdibu_ist_business_unit rdibu, osownerbs1.rdfdt_d_formatted_date_vw rdfdt, --rdownerbs1.rdcod_code               rdcod,&#xD;&#xA;      osownerbs1.rdepe_d_expiry_period_vw rdepe, osownerbs1.osval_d_valuation osval, osownerbs1.ostra_d_transaction ostra, osownerbs1.osbsd_d_business_day osbsd, osownerbs1.ospsp_f_physical_position ospsp&#xD;&#xA;LEFT OUTER JOIN osownerbs1.oscha_d_chain_vw oscha ON (ospsp.chain_oscha_fk = oscha.oscha_pk)&#xD;&#xA;LEFT OUTER JOIN osownerbs1.rdgrd_d_grade_vw rdgrd ON (ospsp.inventory_grade_rdgrd_fk = rdgrd.rdgrd_pk)&#xD;&#xA;LEFT OUTER JOIN osownerbs1.rdloc_d_market_vw rdloc ON (ospsp.market_rdloc_fk = rdloc.rdloc_pk)&#xD;&#xA;LEFT OUTER JOIN rdownerbs1.rdfac_facility rdfac ON (ospsp.intank_facility_rdfac_fk = rdfac.rdfac_pk)&#xD;&#xA;, osownerbs1.oseds_end_of_day_status oseds&#xD;&#xA;LEFT OUTER JOIN rdownerbs1.rdcod_code eodstat ON (oseds.END_OF_DAY_STATUS_RDCOD_FK = eodstat.RDCOD_PK)&#xD;&#xA;LEFT OUTER JOIN rdownerbs1.rdcod_code eodtype ON (oseds.EOD_TYPE_RDCOD_FK = eodtype.rdcod_pk)&#xD;&#xA;LEFT OUTER JOIN rdownerbs1.rdreg_region oseds_reg ON (oseds.wd1_region_rdreg_fk = oseds_reg.rdreg_pk)&#xD;&#xA;WHERE oseds.end_of_day_id = ospsp.end_of_day_id    and ostra.ostra_pk = ospsp.transaction_ostra_fk and osval.osval_pk = ospsp.valuation_osval_fk and tratyp.rdcod_pk = ospsp.transaction_type_rdcod_fk and osbsd.osbsd_pk = ospsp.business_day_osbsd_fk and rdfdt.rdfdt_pk = ospsp.position_date_rdfdt_fk and rdibu.rdibu_pk = ospsp.ist_business_unit_rdibu_fk and rdlge.rdlge_pk = rdibu.legal_entity_rdlge_fk and rdreg.rdreg_pk = ospsp.region_rdreg_fk     and rdepe.rdepe_pk= ospsp.col_gas_cycle_rdepe_fk and ospsp.posting_type_ind =&apos;S&apos; and OSEDS.END_OF_DAY_ID = $$END_OF_DAY_ID&#xD;&#xA;                 ) ODS_PP_POSITIONS"/>
+            </SESSTRANSFORMATIONINST>
+            <SESSTRANSFORMATIONINST ISREPARTITIONPOINT ="YES" PARTITIONTYPE ="PASS THROUGH" PIPELINE ="1" SINSTANCENAME ="STG_INV_Inventory" STAGE ="2" TRANSFORMATIONNAME ="STG_INV_Inventory" TRANSFORMATIONTYPE ="Target Definition">
+                <FLATFILE CODEPAGE ="UTF-8" CONSECDELIMITERSASONE ="NO" DELIMITED ="YES" DELIMITERS ="|" ESCAPE_CHARACTER ="" KEEPESCAPECHAR ="NO" LINESEQUENTIAL ="NO" MULTIDELIMITERSASAND ="NO" NULLCHARTYPE ="ASCII" NULL_CHARACTER ="*" PADBYTES ="1" QUOTE_CHARACTER ="NONE" REPEATABLE ="NO" ROWDELIMITER ="0" SKIPROWS ="0" STRIPTRAILINGBLANKS ="NO"/>
+            </SESSTRANSFORMATIONINST>
+            <SESSTRANSFORMATIONINST ISREPARTITIONPOINT ="NO" PIPELINE ="1" SINSTANCENAME ="mplt_OSSOR_SYSTEM_OF_RECORD.exp_Calculate_SOR_FLAG" STAGE ="1" TRANSFORMATIONNAME ="mplt_OSSOR_SYSTEM_OF_RECORD.exp_Calculate_SOR_FLAG" TRANSFORMATIONTYPE ="Expression">
+                <PARTITION DESCRIPTION ="" NAME ="Partition #1"/>
+            </SESSTRANSFORMATIONINST>
+            <SESSTRANSFORMATIONINST ISREPARTITIONPOINT ="NO" PIPELINE ="1" SINSTANCENAME ="mplt_OSSOR_SYSTEM_OF_RECORD.exp_Gather" STAGE ="1" TRANSFORMATIONNAME ="mplt_OSSOR_SYSTEM_OF_RECORD.exp_Gather" TRANSFORMATIONTYPE ="Expression">
+                <PARTITION DESCRIPTION ="" NAME ="Partition #1"/>
+            </SESSTRANSFORMATIONINST>
+            <SESSTRANSFORMATIONINST ISREPARTITIONPOINT ="NO" PIPELINE ="1" SINSTANCENAME ="mplt_OSSOR_SYSTEM_OF_RECORD.LKP_OSSOR_SYSTEM_OF_RECORD" STAGE ="1" TRANSFORMATIONNAME ="mplt_OSSOR_SYSTEM_OF_RECORD.LKP_OSSOR_SYSTEM_OF_RECORD" TRANSFORMATIONTYPE ="Lookup Procedure">
+                <PARTITION DESCRIPTION ="" NAME ="Partition #1"/>
+                <ATTRIBUTE NAME ="Connection Information" VALUE ="Relational:TCT_ODS_EDW"/>
+            </SESSTRANSFORMATIONINST>
+            <SESSTRANSFORMATIONINST ISREPARTITIONPOINT ="NO" PIPELINE ="1" SINSTANCENAME ="LKP_GET_PREV_BUSINESS_DAY" STAGE ="1" TRANSFORMATIONNAME ="LKP_GET_PREV_BUSINESS_DAY" TRANSFORMATIONTYPE ="Lookup Procedure">
+                <PARTITION DESCRIPTION ="" NAME ="Partition #1"/>
+                <ATTRIBUTE NAME ="Connection Information" VALUE ="Relational:TCT_ODS_EDW"/>
+            </SESSTRANSFORMATIONINST>
+            <CONFIGREFERENCE REFOBJECTNAME ="default_session_config" TYPE ="Session config">
+                <ATTRIBUTE NAME ="Save session log for these runs" VALUE ="12"/>
+            </CONFIGREFERENCE>
+            <SESSIONEXTENSION DSQINSTNAME ="SQ_ODS_INV_Inventory" DSQINSTTYPE ="Source Qualifier" NAME ="Relational Reader" SINSTANCENAME ="ODS_PP_POSITIONS" SUBTYPE ="Relational Reader" TRANSFORMATIONTYPE ="Source Definition" TYPE ="READER"/>
+            <SESSIONEXTENSION NAME ="Relational Reader" SINSTANCENAME ="SQ_ODS_INV_Inventory" SUBTYPE ="Relational Reader" TRANSFORMATIONTYPE ="Source Qualifier" TYPE ="READER">
+                <CONNECTIONREFERENCE CNXREFNAME ="DB Connection" CONNECTIONNAME ="TCT_ODS_EDW" CONNECTIONNUMBER ="1" CONNECTIONSUBTYPE ="ODBC" CONNECTIONTYPE ="Relational" VARIABLE =""/>
+            </SESSIONEXTENSION>
+            <SESSIONEXTENSION NAME ="File Writer" SINSTANCENAME ="STG_INV_Inventory" SUBTYPE ="File Writer" TRANSFORMATIONTYPE ="Target Definition" TYPE ="WRITER">
+                <CONNECTIONREFERENCE CNXREFNAME ="Connection" CONNECTIONNAME ="" CONNECTIONNUMBER ="1" CONNECTIONSUBTYPE ="" CONNECTIONTYPE ="" VARIABLE =""/>
+                <ATTRIBUTE NAME ="Merge Type" VALUE ="No Merge"/>
+                <ATTRIBUTE NAME ="Merge File Directory" VALUE ="$PMTargetFileDir&#x5c;"/>
+                <ATTRIBUTE NAME ="Merge File Name" VALUE ="stg_ppn_physical_posn1.out"/>
+                <ATTRIBUTE NAME ="Append if Exists" VALUE ="NO"/>
+                <ATTRIBUTE NAME ="Create Target Directory" VALUE ="NO"/>
+                <ATTRIBUTE NAME ="Header Options" VALUE ="No Header"/>
+                <ATTRIBUTE NAME ="Header Command" VALUE =""/>
+                <ATTRIBUTE NAME ="Footer Command" VALUE =""/>
+                <ATTRIBUTE NAME ="Output Type" VALUE ="File"/>
+                <ATTRIBUTE NAME ="Merge Command" VALUE =""/>
+                <ATTRIBUTE NAME ="Output file directory" VALUE =""/>
+                <ATTRIBUTE NAME ="Output filename" VALUE ="$OutputFileName"/>
+                <ATTRIBUTE NAME ="Reject file directory" VALUE ="$PMBadFileDir&#x5c;"/>
+                <ATTRIBUTE NAME ="Reject filename" VALUE ="stg_ppn_physical_posn11.bad"/>
+                <ATTRIBUTE NAME ="Command" VALUE =""/>
+                <ATTRIBUTE NAME ="Codepage Parameter" VALUE =""/>
+            </SESSIONEXTENSION>
+            <SESSIONEXTENSION NAME ="Relational Lookup" SINSTANCENAME ="mplt_OSSOR_SYSTEM_OF_RECORD.LKP_OSSOR_SYSTEM_OF_RECORD" SUBTYPE ="Relational Lookup" TRANSFORMATIONTYPE ="Lookup Procedure" TYPE ="LOOKUPEXTENSION">
+                <CONNECTIONREFERENCE CNXREFNAME ="DB Connection" CONNECTIONNAME ="TCT_ODS_EDW" CONNECTIONNUMBER ="1" CONNECTIONSUBTYPE ="ODBC" CONNECTIONTYPE ="Relational" VARIABLE =""/>
+            </SESSIONEXTENSION>
+            <SESSIONEXTENSION NAME ="Relational Lookup" SINSTANCENAME ="LKP_GET_PREV_BUSINESS_DAY" SUBTYPE ="Relational Lookup" TRANSFORMATIONTYPE ="Lookup Procedure" TYPE ="LOOKUPEXTENSION">
+                <CONNECTIONREFERENCE CNXREFNAME ="DB Connection" CONNECTIONNAME ="TCT_ODS_EDW" CONNECTIONNUMBER ="1" CONNECTIONSUBTYPE ="ODBC" CONNECTIONTYPE ="Relational" VARIABLE =""/>
+            </SESSIONEXTENSION>
+            <ATTRIBUTE NAME ="General Options" VALUE =""/>
+            <ATTRIBUTE NAME ="Write Backward Compatible Session Log File" VALUE ="NO"/>
+            <ATTRIBUTE NAME ="Session Log File Name" VALUE ="s_m_EXTRACT_INV_Inventory.log"/>
+            <ATTRIBUTE NAME ="Session Log File directory" VALUE ="$PMSessionLogDir&#x5c;"/>
+            <ATTRIBUTE NAME ="Parameter Filename" VALUE =""/>
+            <ATTRIBUTE NAME ="Enable Test Load" VALUE ="NO"/>
+            <ATTRIBUTE NAME ="$Source connection value" VALUE ="Relational:TCT_ODS_EDW"/>
+            <ATTRIBUTE NAME ="$Target connection value" VALUE =""/>
+            <ATTRIBUTE NAME ="Treat source rows as" VALUE ="Insert"/>
+            <ATTRIBUTE NAME ="Commit Type" VALUE ="Target"/>
+            <ATTRIBUTE NAME ="Commit Interval" VALUE ="10000"/>
+            <ATTRIBUTE NAME ="Commit On End Of File" VALUE ="YES"/>
+            <ATTRIBUTE NAME ="Rollback Transactions on Errors" VALUE ="NO"/>
+            <ATTRIBUTE NAME ="Recovery Strategy" VALUE ="Fail task and continue workflow"/>
+            <ATTRIBUTE NAME ="Java Classpath" VALUE =""/>
+            <ATTRIBUTE NAME ="Performance" VALUE =""/>
+            <ATTRIBUTE NAME ="DTM buffer size" VALUE ="Auto"/>
+            <ATTRIBUTE NAME ="Collect performance data" VALUE ="NO"/>
+            <ATTRIBUTE NAME ="Write performance data to repository" VALUE ="NO"/>
+            <ATTRIBUTE NAME ="Incremental Aggregation" VALUE ="NO"/>
+            <ATTRIBUTE NAME ="Enable high precision" VALUE ="YES"/>
+            <ATTRIBUTE NAME ="Session retry on deadlock" VALUE ="NO"/>
+            <ATTRIBUTE NAME ="Pushdown Optimization" VALUE ="None"/>
+            <ATTRIBUTE NAME ="Allow Temporary View for Pushdown" VALUE ="NO"/>
+            <ATTRIBUTE NAME ="Allow Temporary Sequence for Pushdown" VALUE ="NO"/>
+            <ATTRIBUTE NAME ="Allow Pushdown for User Incompatible Connections" VALUE ="NO"/>
+            <METADATAEXTENSION DATATYPE ="STRING" DESCRIPTION ="" DOMAINNAME ="User Defined Metadata Domain" ISCLIENTEDITABLE ="YES" ISCLIENTVISIBLE ="YES" ISREUSABLE ="NO" ISSHAREREAD ="NO" ISSHAREWRITE ="NO" MAXLENGTH ="256" NAME ="Extension" VALUE ="" VENDORNAME ="INFORMATICA"/>
+        </SESSION>
+        <TASKINSTANCE DESCRIPTION ="s" FAIL_PARENT_IF_INSTANCE_DID_NOT_RUN ="NO" FAIL_PARENT_IF_INSTANCE_FAILS ="YES" ISENABLED ="YES" NAME ="s_m_TCT_ETL_JOB_CONTROL_Update" REUSABLE ="YES" TASKNAME ="s_m_TCT_ETL_JOB_CONTROL_Update" TASKTYPE ="Session" TREAT_INPUTLINK_AS_AND ="YES"/>
+        <TASKINSTANCE DESCRIPTION ="" ISENABLED ="YES" NAME ="Start" REUSABLE ="NO" TASKNAME ="Start" TASKTYPE ="Start"/>
+        <TASKINSTANCE DESCRIPTION ="" FAIL_PARENT_IF_INSTANCE_DID_NOT_RUN ="NO" FAIL_PARENT_IF_INSTANCE_FAILS ="YES" ISENABLED ="YES" NAME ="s_m_TCT_ETL_JOB_CONTROL_Insert" REUSABLE ="YES" TASKNAME ="s_m_TCT_ETL_JOB_CONTROL_Insert" TASKTYPE ="Session" TREAT_INPUTLINK_AS_AND ="YES">
+            <ATTRIBUTE NAME ="Parameter Filename" VALUE =""/>
+            <SESSIONEXTENSION NAME ="Relational Writer" SINSTANCENAME ="OSEWF_ETL_WORKFLOW" SUBTYPE ="Relational Writer" TRANSFORMATIONTYPE ="Target Definition" TYPE ="WRITER">
+                <ATTRIBUTE NAME ="Target load type" VALUE ="Bulk"/>
+            </SESSIONEXTENSION>
+        </TASKINSTANCE>
+        <TASKINSTANCE DESCRIPTION ="" FAIL_PARENT_IF_INSTANCE_DID_NOT_RUN ="NO" FAIL_PARENT_IF_INSTANCE_FAILS ="YES" ISENABLED ="YES" NAME ="s_m_EXTRACT_INV_Inventory" REUSABLE ="NO" TASKNAME ="s_m_EXTRACT_INV_Inventory" TASKTYPE ="Session" TREAT_INPUTLINK_AS_AND ="YES"/>
+        <TASKINSTANCE DESCRIPTION ="" FAIL_PARENT_IF_INSTANCE_DID_NOT_RUN ="NO" FAIL_PARENT_IF_INSTANCE_FAILS ="YES" ISENABLED ="YES" NAME ="CaptureStatistics" REUSABLE ="NO" TASKNAME ="CaptureStatistics" TASKTYPE ="Assignment" TREAT_INPUTLINK_AS_AND ="YES"/>
+        <WORKFLOWLINK CONDITION ="$CaptureStatistics.Status=Succeeded" FROMTASK ="CaptureStatistics" TOTASK ="s_m_TCT_ETL_JOB_CONTROL_Update"/>
+        <WORKFLOWLINK CONDITION ="" FROMTASK ="Start" TOTASK ="s_m_TCT_ETL_JOB_CONTROL_Insert"/>
+        <WORKFLOWLINK CONDITION ="$s_m_TCT_ETL_JOB_CONTROL_Insert.Status=Succeeded" FROMTASK ="s_m_TCT_ETL_JOB_CONTROL_Insert" TOTASK ="s_m_EXTRACT_INV_Inventory"/>
+        <WORKFLOWLINK CONDITION ="$s_m_EXTRACT_INV_Inventory.Status=Succeeded" FROMTASK ="s_m_EXTRACT_INV_Inventory" TOTASK ="CaptureStatistics"/>
+        <WORKFLOWVARIABLE DATATYPE ="date/time" DEFAULTVALUE ="" DESCRIPTION ="The time this task started" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_TCT_ETL_JOB_CONTROL_Update.StartTime" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="date/time" DEFAULTVALUE ="" DESCRIPTION ="The time this task completed" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_TCT_ETL_JOB_CONTROL_Update.EndTime" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Status of this task&apos;s execution" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_TCT_ETL_JOB_CONTROL_Update.Status" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Status of the previous task that is not disabled" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_TCT_ETL_JOB_CONTROL_Update.PrevTaskStatus" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Error code for this task&apos;s execution" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_TCT_ETL_JOB_CONTROL_Update.ErrorCode" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="string" DEFAULTVALUE ="" DESCRIPTION ="Error message for this task&apos;s execution" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_TCT_ETL_JOB_CONTROL_Update.ErrorMsg" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="bigint" DEFAULTVALUE ="" DESCRIPTION ="Rows successfully read" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_TCT_ETL_JOB_CONTROL_Update.SrcSuccessRows" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="bigint" DEFAULTVALUE ="" DESCRIPTION ="Rows failed to read" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_TCT_ETL_JOB_CONTROL_Update.SrcFailedRows" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="bigint" DEFAULTVALUE ="" DESCRIPTION ="Rows successfully loaded" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_TCT_ETL_JOB_CONTROL_Update.TgtSuccessRows" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="bigint" DEFAULTVALUE ="" DESCRIPTION ="Rows failed to load" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_TCT_ETL_JOB_CONTROL_Update.TgtFailedRows" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Total number of transformation errors" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_TCT_ETL_JOB_CONTROL_Update.TotalTransErrors" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="First error code" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_TCT_ETL_JOB_CONTROL_Update.FirstErrorCode" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="string" DEFAULTVALUE ="" DESCRIPTION ="First error message" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_TCT_ETL_JOB_CONTROL_Update.FirstErrorMsg" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="date/time" DEFAULTVALUE ="" DESCRIPTION ="The time this task started" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$Start.StartTime" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="date/time" DEFAULTVALUE ="" DESCRIPTION ="The time this task completed" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$Start.EndTime" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Status of this task&apos;s execution" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$Start.Status" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Status of the previous task that is not disabled" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$Start.PrevTaskStatus" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Error code for this task&apos;s execution" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$Start.ErrorCode" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="string" DEFAULTVALUE ="" DESCRIPTION ="Error message for this task&apos;s execution" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$Start.ErrorMsg" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="date/time" DEFAULTVALUE ="" DESCRIPTION ="The time this task started" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_TCT_ETL_JOB_CONTROL_Insert.StartTime" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="date/time" DEFAULTVALUE ="" DESCRIPTION ="The time this task completed" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_TCT_ETL_JOB_CONTROL_Insert.EndTime" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Status of this task&apos;s execution" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_TCT_ETL_JOB_CONTROL_Insert.Status" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Status of the previous task that is not disabled" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_TCT_ETL_JOB_CONTROL_Insert.PrevTaskStatus" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Error code for this task&apos;s execution" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_TCT_ETL_JOB_CONTROL_Insert.ErrorCode" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="string" DEFAULTVALUE ="" DESCRIPTION ="Error message for this task&apos;s execution" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_TCT_ETL_JOB_CONTROL_Insert.ErrorMsg" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="bigint" DEFAULTVALUE ="" DESCRIPTION ="Rows successfully read" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_TCT_ETL_JOB_CONTROL_Insert.SrcSuccessRows" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="bigint" DEFAULTVALUE ="" DESCRIPTION ="Rows failed to read" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_TCT_ETL_JOB_CONTROL_Insert.SrcFailedRows" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="bigint" DEFAULTVALUE ="" DESCRIPTION ="Rows successfully loaded" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_TCT_ETL_JOB_CONTROL_Insert.TgtSuccessRows" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="bigint" DEFAULTVALUE ="" DESCRIPTION ="Rows failed to load" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_TCT_ETL_JOB_CONTROL_Insert.TgtFailedRows" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Total number of transformation errors" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_TCT_ETL_JOB_CONTROL_Insert.TotalTransErrors" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="First error code" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_TCT_ETL_JOB_CONTROL_Insert.FirstErrorCode" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="string" DEFAULTVALUE ="" DESCRIPTION ="First error message" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_TCT_ETL_JOB_CONTROL_Insert.FirstErrorMsg" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="date/time" DEFAULTVALUE ="" DESCRIPTION ="The time this task started" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_EXTRACT_INV_Inventory.StartTime" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="date/time" DEFAULTVALUE ="" DESCRIPTION ="The time this task completed" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_EXTRACT_INV_Inventory.EndTime" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Status of this task&apos;s execution" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_EXTRACT_INV_Inventory.Status" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Status of the previous task that is not disabled" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_EXTRACT_INV_Inventory.PrevTaskStatus" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Error code for this task&apos;s execution" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_EXTRACT_INV_Inventory.ErrorCode" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="string" DEFAULTVALUE ="" DESCRIPTION ="Error message for this task&apos;s execution" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_EXTRACT_INV_Inventory.ErrorMsg" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="bigint" DEFAULTVALUE ="" DESCRIPTION ="Rows successfully read" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_EXTRACT_INV_Inventory.SrcSuccessRows" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="bigint" DEFAULTVALUE ="" DESCRIPTION ="Rows failed to read" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_EXTRACT_INV_Inventory.SrcFailedRows" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="bigint" DEFAULTVALUE ="" DESCRIPTION ="Rows successfully loaded" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_EXTRACT_INV_Inventory.TgtSuccessRows" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="bigint" DEFAULTVALUE ="" DESCRIPTION ="Rows failed to load" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_EXTRACT_INV_Inventory.TgtFailedRows" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Total number of transformation errors" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_EXTRACT_INV_Inventory.TotalTransErrors" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="First error code" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_EXTRACT_INV_Inventory.FirstErrorCode" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="string" DEFAULTVALUE ="" DESCRIPTION ="First error message" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$s_m_EXTRACT_INV_Inventory.FirstErrorMsg" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="date/time" DEFAULTVALUE ="" DESCRIPTION ="The time this task started" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$CaptureStatistics.StartTime" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="date/time" DEFAULTVALUE ="" DESCRIPTION ="The time this task completed" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$CaptureStatistics.EndTime" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Status of this task&apos;s execution" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$CaptureStatistics.Status" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Status of the previous task that is not disabled" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$CaptureStatistics.PrevTaskStatus" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="integer" DEFAULTVALUE ="" DESCRIPTION ="Error code for this task&apos;s execution" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$CaptureStatistics.ErrorCode" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="string" DEFAULTVALUE ="" DESCRIPTION ="Error message for this task&apos;s execution" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$CaptureStatistics.ErrorMsg" USERDEFINED ="NO"/>
+        <WORKFLOWVARIABLE DATATYPE ="nstring" DEFAULTVALUE ="" DESCRIPTION ="" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$$WF_SRC_ROWS_READ" USERDEFINED ="YES"/>
+        <WORKFLOWVARIABLE DATATYPE ="nstring" DEFAULTVALUE ="" DESCRIPTION ="" ISNULL ="NO" ISPERSISTENT ="NO" NAME ="$$WF_TGT_ROWS_WRITTEN" USERDEFINED ="YES"/>
+        <ATTRIBUTE NAME ="Parameter Filename" VALUE ="$PMRootDir/Param/wf_Extract_gops.param"/>
+        <ATTRIBUTE NAME ="Write Backward Compatible Workflow Log File" VALUE ="YES"/>
+        <ATTRIBUTE NAME ="Workflow Log File Name" VALUE ="wf_EXTRACT_INV_Inventory.log"/>
+        <ATTRIBUTE NAME ="Workflow Log File Directory" VALUE ="$PMWorkflowLogDir&#x5c;"/>
+        <ATTRIBUTE NAME ="Save Workflow log by" VALUE ="By timestamp"/>
+        <ATTRIBUTE NAME ="Save workflow log for these runs" VALUE ="0"/>
+        <ATTRIBUTE NAME ="Service Name" VALUE =""/>
+        <ATTRIBUTE NAME ="Service Timeout" VALUE ="0"/>
+        <ATTRIBUTE NAME ="Is Service Visible" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Is Service Protected" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Fail task after wait time" VALUE ="0"/>
+        <ATTRIBUTE NAME ="Enable HA recovery" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Automatically recover terminated tasks" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Service Level Name" VALUE ="Default"/>
+        <ATTRIBUTE NAME ="Allow concurrent run with unique run instance name" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Allow concurrent run with same run instance name" VALUE ="NO"/>
+        <ATTRIBUTE NAME ="Maximum number of concurrent runs" VALUE ="0"/>
+        <ATTRIBUTE NAME ="Assigned Web Services Hubs" VALUE =""/>
+        <ATTRIBUTE NAME ="Maximum number of concurrent runs per Hub" VALUE ="1000"/>
+        <ATTRIBUTE NAME ="Expected Service Time" VALUE ="1"/>
+    </WORKFLOW>
+</FOLDER>
+</REPOSITORY>
+</POWERMART>
+
+
+
+The provided XML document is an Informatica PowerMart repository file, which contains the definitions of various Informatica objects such as sessions, workflows, transformations, and their configurations. Here's a breakdown of the key elements in the XML:
+
+<REPOSITORY>: This is the root element that contains the repository details, including its name, version, and database type.
+<FOLDER>: This element contains a group of related Informatica objects, such as sessions and workflows.
+<CONFIG>: This element defines a session configuration object, which specifies various settings and parameters for a session, such as memory allocation, error handling, and commit options.
+<SESSION>: This element defines an Informatica session, which is a collection of transformations and mappings that perform data integration operations. The provided XML contains two sessions:
+
+s_m_TCT_ETL_JOB_CONTROL_Insert: This session is responsible for inserting data into the OSEWF_ETL_WORKFLOW table.
+s_m_TCT_ETL_JOB_CONTROL_Update: This session is responsible for updating the OSEWF_ETL_WORKFLOW table.
+
+
+<SESSTRANSFORMATIONINST>: This element represents an instance of a transformation within a session. It defines the transformation type (e.g., Source Definition, Expression, Target Definition) and its properties.
+<SESSIONEXTENSION>: This element defines extensions or customizations for a specific transformation instance within a session. For example, it can define database connections, file operations, or lookup configurations.
+<WORKFLOW>: This element defines an Informatica workflow, which is a sequence of tasks (including sessions) that are executed in a specific order. The provided XML contains a workflow named wf_EXTRACT_INV_GLOBAL_GOPS, which includes tasks for capturing statistics, executing the s_m_EXTRACT_INV_Inventory session, and updating the job control table.
+<TASK>: This element represents a task within a workflow, such as a session execution, assignment, or control flow operation (e.g., Start, End).
+<WORKFLOWLINK>: This element defines the conditional links between tasks in a workflow, specifying the conditions under which a task should be executed based on the status of the previous task.
+<WORKFLOWVARIABLE>: This element defines variables used within the workflow, such as session-level variables for capturing statistics or status information.
+
+The XML script appears to be a part of an Informatica ETL process that extracts physical position data from an ODS (Operational Data Store) system and creates an output file for a DWH (Data Warehouse). It includes various sessions, transformations, and a workflow that orchestrates the overall process.
